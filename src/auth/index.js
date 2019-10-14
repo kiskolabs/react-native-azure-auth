@@ -98,6 +98,7 @@ export default class Auth {
    * @param {String} input.redirectUri original redirectUri used when calling `/authorize`.
    * @param {String} input.scope A space-separated list of scopes. 
    *    The scopes requested in this leg must be equivalent to or a subset of the scopes requested in the first leg
+   * @param {String} input.code_verifier the same code_verifier that was used to obtain the authorization_code.
    * @returns {Promise}
    * @see https://docs.microsoft.com/en-us/azure/active-directory/develop/active-directory-v2-protocols-oauth-code#request-an-access-token
    *
@@ -107,7 +108,8 @@ export default class Auth {
         const payload = validate({
             parameters: {
                 code: { required: true },
-                scope: { required: true }
+                scope: { required: true },
+                code_verifier: { required: true }
             }
         }, input)
 
